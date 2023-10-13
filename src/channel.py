@@ -45,6 +45,7 @@ class Channel:
 
     def __ge__(self, other):
         return int(self.subscriber_count) >= int(other.subscriber_count)
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         channel = self.get_service().channels().list(id=self.__channel_id, part='snippet,statistics').execute()
