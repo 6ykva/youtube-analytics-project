@@ -9,11 +9,20 @@ class Video:
     """
     def __init__(self, video_id: str) -> None:
         self.video_id = video_id
-        info = self.get_info()
-        self.title = info['items'][0]['snippet']['title']
-        self.url = 'https://www.youtube.com/' + self.video_id
-        self.view_count = int(info['items'][0]['statistics']['viewCount'])
-        self.like_count = int(info['items'][0]['statistics']['likeCount'])
+
+        try:
+            info = self.get_info()
+            self.title = info['items'][0]['snippet']['title']
+        except IndexError:
+            self.title = None
+            self.url = None
+            self.video_views = None
+            self.like_count = None
+            print("Видео с таким id не найдено")
+        else:
+            self.url = 'https://www.youtube.com/' + self.video_id
+            self.view_count = int(info['items'][0]['statistics']['viewCount'])
+            self.like_count = int(info['items'][0]['statistics']['likeCount'])
 
     def __str__(self):
         return self.title
