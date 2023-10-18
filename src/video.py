@@ -1,3 +1,5 @@
+import os
+
 from googleapiclient.discovery import build
 
 
@@ -27,7 +29,7 @@ class Video:
         """
         Загружаем сервис по API
         """
-        api_key = 'AIzaSyBCgL6CnIFgroMqCKtQBoj5puwTWwSFaSs'
+        api_key: str = os.getenv('YT_API_KEY')
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
 
